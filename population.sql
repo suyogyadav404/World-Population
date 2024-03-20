@@ -122,3 +122,13 @@ ORDER BY Country
 SELECT country, 1970_Population, 2022_Population
 FROM population
 WHERE 1970_Population > 2022_Population
+
+
+-- Countries whose population in more than avg population in year 2022
+
+SELECT country, 2022_Population, (SELECT round(avg(2022_Population)) FROM population) AS Avg_population_2022
+FROM population
+WHERE 2022_Population > (
+    SELECT avg(2022_Population)
+    FROM population
+)
